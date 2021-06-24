@@ -1,5 +1,6 @@
-package io.todak.study.springbootmaster.reactive;
+package io.todak.study.springbootmaster.service;
 
+import io.todak.study.springbootmaster.domain.Dish;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
@@ -20,7 +21,7 @@ public class KitchenService {
     private Random picker = new Random();
 
     // 요리 스트림 생성
-    Flux<Dish> getDishes() {
+    public Flux<Dish> getDishes() {
         return Flux.<Dish>generate(sink -> sink.next(randomDish()))
                 .delayElements(Duration.ofMillis(250));
     }

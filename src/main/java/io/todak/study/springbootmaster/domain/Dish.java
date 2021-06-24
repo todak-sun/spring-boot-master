@@ -1,4 +1,4 @@
-package io.todak.study.springbootmaster.reactive;
+package io.todak.study.springbootmaster.domain;
 
 public class Dish {
 
