@@ -26,12 +26,12 @@
         <td th:text="${item.name}"></td>
         <td th:text="${item.price}"></td>
         <td>
-            <form method="post" th:action="@{'/add/' + ${item.id}">
+            <form method="post" th:action="@{'/add/' + ${item.id}}">
                 <input type="submit" value="Add to Cart">
             </form>
         </td>
         <td>
-            <form method="post" th:action="@{'/delete/' + ${item.id}">
+            <form method="post" th:action="@{'/delete/' + ${item.id}}">
                 <input type="submit" value="Add to Cart">
             </form>
         </td>

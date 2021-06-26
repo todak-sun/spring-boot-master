@@ -5,9 +5,11 @@ import io.todak.study.springbootmaster.repository.CartRepository;
 import io.todak.study.springbootmaster.repository.ItemRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.reactive.result.view.Rendering;
 import reactor.core.publisher.Mono;
 
+@RequestMapping
 @Controller
 public class HomeController {
 
@@ -22,7 +24,7 @@ public class HomeController {
     @GetMapping
     Mono<Rendering> home() {
         return Mono.just(
-                Rendering.view("home.html")
+                Rendering.view("home")
                         .modelAttribute("items", this.itemRepository.findAll())
                         .modelAttribute("cart", this.cartRepository.findById("My Cart").defaultIfEmpty(new Cart("My Cart")))
                         .build()
