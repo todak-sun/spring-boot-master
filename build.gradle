@@ -6,7 +6,7 @@ plugins {
 
 group = 'io.todak.study'
 version = '0.0.1'
-sourceCompatibility = '16'
+sourceCompatibility = '11'
 
 configurations {
     compileOnly {
@@ -24,6 +24,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
     implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo' // 내장형 몽고디비 도구
     implementation 'org.mongodb:mongodb-driver-sync' // 전통적인 몽고디비 드라이버. 테스트 데이터 로딩시 필요
+    implementation 'io.projectreactor.tools:blockhound:1.0.6.RELEASE' // 블로킹 코드를 잡아내는 라이브러리
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
