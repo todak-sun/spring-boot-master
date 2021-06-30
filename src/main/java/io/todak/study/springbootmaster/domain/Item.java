@@ -1,11 +1,12 @@
 package io.todak.study.springbootmaster.domain;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.geo.Point;
 
-import java.time.LocalDateTime;
-
+@EqualsAndHashCode
+@ToString
 @Getter
 public class Item {
 
@@ -14,11 +15,11 @@ public class Item {
     private String name;
     private String description;
     private double price;
-    private String distributorRegion;
-    private LocalDateTime releaseDate;
-    private int availableUnits;
-    private Point location;
-    private boolean active;
+//    private String distributorRegion;
+//    private LocalDateTime releaseDate;
+//    private int availableUnits;
+//    private Point location;
+//    private boolean active;
 
     private Item() {
     }
@@ -34,4 +35,10 @@ public class Item {
         this.price = price;
     }
 
+    public Item(String id, String name, String description, double price) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+    }
 }
