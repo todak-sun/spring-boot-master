@@ -4,15 +4,14 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-class CartService {
+public class CartService {
 
-    private final ItemRepository itemRepository;
     private final CartRepository cartRepository;
+    private final ItemRepository itemRepository;
 
-    CartService(ItemRepository itemRepository,
-                CartRepository cartRepository) {
-        this.itemRepository = itemRepository;
+    public CartService(CartRepository cartRepository, ItemRepository itemRepository) {
         this.cartRepository = cartRepository;
+        this.itemRepository = itemRepository;
     }
 
     Mono<Cart> addToCart(String cartId, String id) {
@@ -24,10 +23,10 @@ class CartService {
                         .map(cartItem -> {
                             cartItem.increment();
                             return Mono.just(cart);
-                        }).orElseGet(() -> this.itemRepository.findById(id) //
-                                .map(CartItem::new) // <4>
-                                .doOnNext(cartItem -> cart.getCartItems().add(cartItem)) //
+                        }).orElseGet(() -> this.itemRepository.findById(id)
+                                .map(CartItem::new)
+                                .doOnNext(cartItem -> cart.getCartItems().add(cartItem))
                                 .map(cartItem -> cart)))
-                .flatMap(this.cartRepository::save); // <5>
+                .flatMap(this.cartRepository::save);
     }
 }

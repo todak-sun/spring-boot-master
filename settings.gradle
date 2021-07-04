@@ -1,4 +1,13 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+}
+
 rootProject.name = 'spring-boot-master'
 
 include 'reactive-1'
 include 'reactive-2'
+include 'reactive-3'
+include 'reactive-4'
+include 'reactive-5'

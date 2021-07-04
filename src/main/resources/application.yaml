@@ -1,9 +1,0 @@
-spring:
-  webflux:
-    hiddenmethod:
-      filter:
-        enabled: true
-
-logging:
-  level:
-    io.todak.study.springbootmaster.sample.ReactorExample: debug

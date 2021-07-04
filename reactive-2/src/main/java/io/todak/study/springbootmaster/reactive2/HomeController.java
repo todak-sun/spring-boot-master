@@ -8,12 +8,11 @@ import reactor.core.publisher.Mono;
 @Controller
 public class HomeController {
 
-    private ItemRepository itemRepository;
-    private CartRepository cartRepository;
-    private InventoryService inventoryService;
+    private final ItemRepository itemRepository;
+    private final CartRepository cartRepository;
+    private final InventoryService inventoryService;
 
-    public HomeController(ItemRepository itemRepository, CartRepository cartRepository,
-                          InventoryService inventoryService) {
+    public HomeController(ItemRepository itemRepository, CartRepository cartRepository, InventoryService inventoryService) {
         this.itemRepository = itemRepository;
         this.cartRepository = cartRepository;
         this.inventoryService = inventoryService;
@@ -30,7 +29,6 @@ public class HomeController {
                                 .defaultIfEmpty(new Cart("My Cart")))
                 .build());
     }
-
 
 
     @PostMapping("/add/{id}")

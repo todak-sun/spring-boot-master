@@ -16,27 +16,26 @@ class InventoryService {
     private ItemRepository repository;
     private ReactiveFluentMongoOperations fluentOperations;
 
-    InventoryService(ItemRepository repository, //
-                     ReactiveFluentMongoOperations fluentOperations) {
+    InventoryService(ItemRepository repository, ReactiveFluentMongoOperations fluentOperations) {
         this.repository = repository;
         this.fluentOperations = fluentOperations;
     }
 
     Flux<Item> getItems() {
-        // imagine calling a remote service!
+
         return Flux.empty();
     }
 
-    // tag::code-2[]
+
     Flux<Item> search(String partialName, String partialDescription, boolean useAnd) {
         if (partialName != null) {
             if (partialDescription != null) {
                 if (useAnd) {
-                    return repository //
-                            .findByNameContainingAndDescriptionContainingAllIgnoreCase( //
+                    return repository
+                            .findByNameContainingAndDescriptionContainingAllIgnoreCase(
                                     partialName, partialDescription);
                 } else {
-                    return repository.findByNameContainingOrDescriptionContainingAllIgnoreCase( //
+                    return repository.findByNameContainingOrDescriptionContainingAllIgnoreCase(
                             partialName, partialDescription);
                 }
             } else {
@@ -50,46 +49,43 @@ class InventoryService {
             }
         }
     }
-    // end::code-2[]
 
-    // tag::code-3[]
+
     Flux<Item> searchByExample(String name, String description, boolean useAnd) {
-        Item item = new Item(name, description, 0.0); // <1>
+        Item item = new Item(name, description, 0.0);
 
-        ExampleMatcher matcher = (useAnd // <2>
-                ? ExampleMatcher.matchingAll() //
-                : ExampleMatcher.matchingAny()) //
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING) // <3>
-                .withIgnoreCase() // <4>
-                .withIgnorePaths("price"); // <5>
+        ExampleMatcher matcher = (useAnd
+                ? ExampleMatcher.matchingAll()
+                : ExampleMatcher.matchingAny())
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                .withIgnoreCase()
+                .withIgnorePaths("price");
 
-        Example<Item> probe = Example.of(item, matcher); // <6>
+        Example<Item> probe = Example.of(item, matcher);
 
-        return repository.findAll(probe); // <7>
+        return repository.findAll(probe);
     }
-    // end::code-3[]
 
-    // tag::code-4[]
+
     Flux<Item> searchByFluentExample(String name, String description) {
-        return fluentOperations.query(Item.class) //
-                .matching(query(where("TV tray").is(name).and("Smurf").is(description))) //
+        return fluentOperations.query(Item.class)
+                .matching(query(where("TV tray").is(name).and("Smurf").is(description)))
                 .all();
     }
-    // end::code-4[]
 
-    // tag::code-5[]
+
     Flux<Item> searchByFluentExample(String name, String description, boolean useAnd) {
         Item item = new Item(name, description, 0.0);
 
-        ExampleMatcher matcher = (useAnd //
-                ? ExampleMatcher.matchingAll() //
-                : ExampleMatcher.matchingAny()) //
-                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING) //
-                .withIgnoreCase() //
+        ExampleMatcher matcher = (useAnd
+                ? ExampleMatcher.matchingAll()
+                : ExampleMatcher.matchingAny())
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING)
+                .withIgnoreCase()
                 .withIgnorePaths("price");
 
-        return fluentOperations.query(Item.class) //
-                .matching(query(byExample(Example.of(item, matcher)))) //
+        return fluentOperations.query(Item.class)
+                .matching(query(byExample(Example.of(item, matcher))))
                 .all();
     }
 

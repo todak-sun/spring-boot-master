@@ -3,6 +3,7 @@ package io.todak.study.springbootmaster.reactive2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 @SpringBootApplication
 public class Reactive2Application {
 
@@ -11,3 +12,4 @@ public class Reactive2Application {
     }
 
 }
+
