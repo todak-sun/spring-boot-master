@@ -25,6 +25,7 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
+    testImplementation 'io.projectreactor.tools:blockhound-junit-platform:1.0.3.RELEASE'
 }
 
 test {
