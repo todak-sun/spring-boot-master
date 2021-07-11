@@ -48,6 +48,10 @@ public class BlockHoundIntegrationTest {
     @Test
     void blockHoundShouldTrapBlockingCall() {
         Mono.delay(Duration.ofSeconds(1))
+                //블로킹 여부를 블록하운드로 검증하기 위해서는,
+                //리액터 스레드 안에서 실행되야 한다.
+                // 따라서, Mono.delay()를 실행해
+                // 후속 작업이 리액터 스레드 안에서 실행하게끔 한다.
                 .flatMap(tick -> inventoryService.addItemToCart("My Cart", "item1"))
                 .as(StepVerifier::create)
                 .verifyErrorSatisfies(throwable -> {
