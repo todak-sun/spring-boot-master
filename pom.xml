@@ -19,6 +19,7 @@
         <module>reactive-3</module>
         <module>reactive-4</module>
         <module>reactive-5</module>
+        <module>reactive-6</module>
     </modules>
 
 </project>

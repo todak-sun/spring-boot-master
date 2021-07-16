@@ -11,7 +11,8 @@ public class SpringDataHttpTraceRepository implements HttpTraceRepository {
 	private final HttpTraceWrapperRepository repository;
 
 	public SpringDataHttpTraceRepository(HttpTraceWrapperRepository repository) {
-		this.repository = repository; // <1>
+		this.repository = repository;
+		// 생성자를 통해, HttpTraceRepository 인스턴스를 주입받음.
 	}
 
 	@Override
